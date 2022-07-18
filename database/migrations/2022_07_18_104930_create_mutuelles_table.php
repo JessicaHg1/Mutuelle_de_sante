@@ -21,6 +21,8 @@ class CreateMutuellesTable extends Migration
             $table->string('region');
             $table->string('adresse');
             $table->integer('tel');
+            $table->string('email');
+            $table->integer('montant_cotisation');
             $table->integer('nb_pers_a_charge_admis');
             $table->integer('montant_adhesion');
             $table->string('periode_observation');

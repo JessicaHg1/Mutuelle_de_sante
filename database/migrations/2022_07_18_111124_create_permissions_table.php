@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePrestatairesTable extends Migration
+class CreatePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreatePrestatairesTable extends Migration
      */
     public function up()
     {
-        Schema::create('prestataires', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->integer('tel');
-            $table->string('adresse');
-            $table->string('region');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +26,6 @@ class CreatePrestatairesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prestataires');
+        Schema::dropIfExists('permissions');
     }
 }

@@ -15,6 +15,9 @@ class CreatePrestationsTable extends Migration
     {
         Schema::create('prestations', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('description')->nullable();
+            $table->boolean('etat')->nullable();
             $table->timestamps();
         });
     }
