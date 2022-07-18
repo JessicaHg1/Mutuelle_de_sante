@@ -8,6 +8,8 @@ class Soins extends Component
 {
     public function render()
     {
-        return view('livewire.soins');
+        return view('livewire.soins.soins')
+            ->extends('master')
+            ->section('content');
     }
 }

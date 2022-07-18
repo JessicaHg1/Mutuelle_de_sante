@@ -227,6 +227,8 @@
   <script src="{{ asset('asset/vendor/php-email-form/validate.js') }}"></script>
   <!-- Template Main JS File -->
   <script src="{{ asset('asset/js/main.js') }}"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
 @livewireScripts
 </body>

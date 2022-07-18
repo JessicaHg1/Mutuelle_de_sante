@@ -8,6 +8,8 @@ class Cotisation extends Component
 {
     public function render()
     {
-        return view('livewire.cotisation');
+        return view('livewire.cotisations.cotisation')
+            ->extends('master')
+            ->section('content');
     }
 }

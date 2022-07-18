@@ -8,6 +8,8 @@ class Beneficiaire extends Component
 {
     public function render()
     {
-        return view('livewire.beneficiaire');
+        return view('livewire.beneficiaires.beneficiaire')
+            ->extends('master')
+            ->section('content');
     }
 }

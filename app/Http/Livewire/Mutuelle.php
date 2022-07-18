@@ -8,6 +8,8 @@ class Mutuelle extends Component
 {
     public function render()
     {
-        return view('livewire.mutuelle');
+        return view('livewire.mutuelles.mutuelle')
+            ->extends('master')
+            ->section('content');
     }
 }

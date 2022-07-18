@@ -8,6 +8,8 @@ class Adherent extends Component
 {
     public function render()
     {
-        return view('livewire.adherent');
+        return view('livewire.adherents.adherent')
+            ->extends('master')
+            ->section('content');
     }
 }
