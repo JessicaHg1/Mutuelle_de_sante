@@ -121,7 +121,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="">
+        <a class="nav-link collapsed"  href="{{ route('dashboard') }}">
           <i class="bi bi-grid"></i>
           <span>Tableau de bord</span>
         </a>
@@ -130,14 +130,14 @@
      
       
       <li class="nav-item">
-        <a href="" class="nav-link collapsed">
+        <a href="{{ route('utilisateurs') }}" class="nav-link collapsed">
           <i class="bi bi-person-fill"></i>
           <span>Utilisateurs</span>
         </a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="">
+        <a class="nav-link collapsed"  href="{{ route('mutuelles') }}">
           <i class="ri ri-community-line"></i>
           <span>Mutuelles de santé</span>
         </a>   
@@ -149,13 +149,13 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="" class="nav-link collapsed ">
+            <a href="{{ route('beneficiaires.adherents') }}" class="nav-link collapsed ">
               <i class="ri ri-team-line"></i><span>Adhérents</span>
             </a>
           </li>
 
            <li>
-            <a href="" class="nav-link collapsed ">
+            <a href="{{ route('beneficiaires.beneficiaire') }}" class="nav-link collapsed ">
               <i class="ri ri-team-line"></i><span>Personnes à charge</span>
             </a>
           </li>
@@ -163,39 +163,28 @@
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="">
+        <a class="nav-link collapsed"  href="{{ route('prestataires') }}">
           <i class="ri ri-hospital-line"></i>
           <span>Prestataires de soins</span>
         </a>   
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="">
+        <a class="nav-link collapsed"  href="{{ route('prestations') }}">
           <i class="bi bi-umbrella-fill"></i>
           <span>Prestations</span>
         </a>   
       </li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#cotisation-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-piggy-bank-fill"></i><span>Cotisations</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#cotisation-nav" data-bs-toggle="collapse" href="{{ route('cotisations') }}">
+          <i class="bi bi-piggy-bank-fill"></i><span>Cotisations</span>
         </a>
-        <ul id="cotisation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Data Tables</span>
-            </a>
-          </li>
-        </ul>
+       
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="">
+        <a class="nav-link collapsed"  href="{{ route('soins') }}">
           <i class="bi bi-umbrella-fill"></i>
           <span>Soins</span>
         </a>   
