@@ -13,7 +13,6 @@ class Mutuelle extends Model
 
     protected $fillable = [
         'nom',
-        'sigle',
         'logo',
         'date_creation',
         'region',

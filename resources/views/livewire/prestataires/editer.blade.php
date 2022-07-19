@@ -41,7 +41,7 @@
 
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Modifier</button>
-                  <button type="button" class="btn btn-danger" wire:click="goToPrestataireList()">Retourner à la liste des prestataires</button>
+                  <button type="button" class="btn btn-danger" wire:click="goToPrestataireList">Retourner à la liste des prestataires</button>
                 </div>
 
               </form><!-- End General Form Elements -->

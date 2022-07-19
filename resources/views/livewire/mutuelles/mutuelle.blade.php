@@ -1,4 +1,4 @@
-<div>
+<div wire:ignore.self>
     @if ($currentPage == PAGEAJOUTER)
         @include("livewire.mutuelles.ajouter")
     @endif

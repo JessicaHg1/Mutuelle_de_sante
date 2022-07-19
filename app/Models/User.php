@@ -17,6 +17,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
@@ -44,4 +47,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function mutuelle()
+    {
+        return $this->belongsTo(Mutuelle::class, 'mutuelle_id', 'id');
+    }
+
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, "user_role", "user_id", "role_id");
+    }
+
+    public function hasRole($user)
+    {
+        return $this->role()->where("nom", $user)->first() !== null;
+    }
+
+    public function permission()
+    {
+        return $this->belongsToMany(Permission::class, "user_permission", "user_id", "permission_id");
+    }
 }
