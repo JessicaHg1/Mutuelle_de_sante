@@ -30,23 +30,27 @@ class AuthServiceProvider extends ServiceProvider
         Schema::defaultStringLength(200);
 
         Gate::define("prestataire", function (User $user) {
-            return $user->hasProfil("prestataire");
+            return $user->hasRole("prestataire");
+        });
+
+        Gate::define("directeur", function (User $user) {
+            return $user->hasRole("directeur");
         });
 
         Gate::define("secretaire", function (User $user) {
-            return $user->hasProfil("secretaire");
+            return $user->hasRole("secretaire");
         });
 
         Gate::define("adherent", function (User $user) {
-            return $user->hasProfil("adherent");
+            return $user->hasRole("adherent");
         });
 
         Gate::define("admin", function (User $user) {
-            return $user->hasProfil("admin");
+            return $user->hasRole("admin");
         });
 
         Gate::after(function (User $user) {
-            return $user->hasProfil("superadmin");
+            return $user->hasRole("superadmin");
         });
     }
 }

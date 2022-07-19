@@ -6,12 +6,12 @@
                     Liste des utilisateurs
                     </h3>
 
-                    <div class="card-tools align-items-center">
+                    <!--<div class="card-tools align-items-center">
                         <a class="btn text-white" wire:click.prevent='ajouterUser()'>
                             <i class="bi bi-person-plus-fill"></i>
                             <span>Ajouter un utilisateur</span>
                         </a>
-                    </div>
+                    </div>-->
 
                     <div class="search-bar">
                         <form class="search-form d-flex align-items-center" method="" action="#">

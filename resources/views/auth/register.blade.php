@@ -38,7 +38,7 @@
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Téléphone</label>
-                      <input type="numeric" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="email">
+                      <input type="numeric" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
 
                                 @error('tel')
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Mot de passe</label>
-                      <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                      <input type="password" disabled placeholder='password' id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -71,14 +71,10 @@
                                 @enderror
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Confirmer le mot de passe</label>
-                      <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                      
-                    </div>
+                    
 
                     <div class="col-12 text-center">
-                      <button class="btn btn-primary w-50" type="submit">S'enregistrer</button>
+                      <button class="btn btn-primary w-50" type="submit">Enregistrer</button>
                     </div>
                   </form>
 

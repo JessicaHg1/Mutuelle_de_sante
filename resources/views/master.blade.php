@@ -128,7 +128,7 @@
       </li><!-- End Dashboard Nav -->
       
      
-      
+      @can("admin")
       <li class="nav-item">
         <a href="{{ route('utilisateurs') }}" class="nav-link collapsed">
           <i class="bi bi-person-fill"></i>
@@ -141,11 +141,13 @@
           <i class="ri ri-community-line"></i>
           <span>Mutuelles de santé</span>
         </a>   
-      </li>
-                   
+      </li> 
+      @endcan
+
+      @can("secretaire")
       <li class="nav-item ">
         <a class="nav-link collapsed " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="ri ri-team-line"></i><span>Bénéficiares</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="ri ri-team-line"></i><span>Bénéficiaires</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
@@ -181,14 +183,18 @@
           <i class="bi bi-piggy-bank-fill"></i><span>Cotisations</span>
         </a>
        
-      </li>
-
+      </li>  
+      @endcan             
+      
+      @can("prestataire")
       <li class="nav-item">
         <a class="nav-link collapsed"  href="{{ route('soins') }}">
           <i class="bi bi-umbrella-fill"></i>
           <span>Soins</span>
         </a>   
-      </li>
+      </li>  
+      @endcan
+      
       
     </ul>
 
