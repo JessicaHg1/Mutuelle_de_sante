@@ -19,7 +19,11 @@ class Dashboard extends Component
 
         $benef = FacadesDB::table('beneficiaires')->count();
 
-        return view('livewire.dashboard', compact('mutuelles', 'users', 'adherents', 'benef'))
+        $prestataires = FacadesDB::table('prestataires')->count();
+
+        $prestations = FacadesDB::table('prestations')->count();
+
+        return view('livewire.dashboard', compact('mutuelles', 'users', 'adherents', 'benef', 'prestataires', 'prestations'))
             ->extends('master')
             ->section('content');
     }

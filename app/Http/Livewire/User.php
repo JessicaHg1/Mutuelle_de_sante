@@ -20,8 +20,6 @@ class User extends Component
 
     public $search = "";
 
-    public $newUser = [];
-
     public $editUser = [];
 
     public $rolePermissions = [];
@@ -37,15 +35,6 @@ class User extends Component
                 'editUser.email' => ['required', 'email', ValidationRule::unique("users", "email")->ignore($this->editUser['id'])],
             ];
         }
-
-        return [
-            'newUser.name' => 'required',
-            'newUser.sexe' => 'required',
-            'newUser.password' => 'string',
-            'newUser.mutuelle_id' => 'string',
-            'newUser.email' => 'required|unique:users,email',
-            'newUser.tel' => 'required | numeric |unique:users,tel'
-        ];
     }
 
     public function render()
@@ -62,11 +51,6 @@ class User extends Component
         return view('livewire.users.user', $data, compact('mutuelles'))
             ->extends('master')
             ->section('content');
-    }
-
-    public function ajouterUser()
-    {
-        $this->currentPage = PAGEAJOUTER;
     }
 
     public function editerUser($id)
@@ -140,19 +124,6 @@ class User extends Component
     {
         $this->currentPage = PAGELISTE;
         $this->editUser = [];
-    }
-
-    public function addUser()
-    {
-        $validationAttributes = $this->validate();
-
-        $validationAttributes['newUser']['password'] = 'password';
-
-        ModelsUser::create($validationAttributes['newUser']);
-
-        $this->newUser = [];
-
-        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Utilisateur ajouté avec succès !"]);
     }
 
     public function confirmDelete($name, $id)

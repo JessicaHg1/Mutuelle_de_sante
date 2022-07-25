@@ -5,9 +5,11 @@ use App\Http\Livewire\Beneficiaire;
 use App\Http\Livewire\Cotisation;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Mutuelle;
+use App\Http\Livewire\Prescription;
 use App\Http\Livewire\Prestataire;
 use App\Http\Livewire\Prestation;
 use App\Http\Livewire\Soins;
+use App\Http\Livewire\TestPDF;
 use App\Http\Livewire\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,11 +45,18 @@ Route::get('/prestations', Prestation::class)->name('prestations');
 
 Route::get('/prestataires', Prestataire::class)->name('prestataires');
 
-Route::get('/cotisaions', Cotisation::class)->name('cotisations');
+Route::get('/cotisations', Cotisation::class)->name('cotisations');
 
 Route::get('/soins', Soins::class)->name('soins');
 
+Route::get('/prescriptions', Prescription::class)->name('prescriptions');
+
 Route::get('/dashbord', Dashboard::class)->name('dashboard');
+
+Route::get('/pdf', TestPDF::class)->name('pdf');
+
+Route::get('/test-p-d-f_pdf/pdf', [TestPDF::class, 'listeTestPdf'])->name('test-p-d-f_pdf/pdf');
+
 
 Route::group(
     [

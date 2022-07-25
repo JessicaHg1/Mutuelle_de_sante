@@ -3,13 +3,13 @@
                 <div class="card-header bg-secondary d-flex align-items-center">
                     <h3 class="card-title flex-grow-1 text-white">
                     <i class="bi bi-list-stars bi-2x"></i>
-                    Liste des soins
+                    Liste des prescriptions
                     </h3>
 
                     <div class="card-tools align-items-center">
-                        <a class="btn text-white" wire:click.prevent='ajouterSoin()'>
+                        <a class="btn text-white" wire:click.prevent='ajouterPrescription()'>
                             <i class="bi bi-plus-lg"></i>
-                            <span>Ajouter un soin</span>
+                            <span>Ajouter une prescription</span>
                         </a>
                     </div>
 
@@ -30,24 +30,24 @@
                     <th scope="col">#</th>
                     <th scope="col">Bénéficiaire</th>
                     <th scope="col">Prestataire</th>
-                    <th scope="col">Prestation</th>
+                    <th scope="col">Prescription</th>
                     <th scope="col">Date</th>
                     <th scope="col">Montant</th>
                   </tr>
                 </thead>
                 <tbody>
                   
-                    @foreach ($soins as $soin)
+                  @foreach ($presciptions as $prescription)
                         <tr>
-                            <td>{{ $soin->id }}</td>
-                            <td>{{ $soin->benef}}</td>
-                            <td>{{ $soin->prestataire->nom }}</td>
-                            <td>{{ $soin->prestation->nom }}</td>
-                            <td>{{ $soin->date }}</td>
-                            <td>{{ $soin->montant }}</td>
+                            <td>{{ $prescription->id }}</td>
+                            <td>{{ $prescription->benef}}</td>
+                            <td>{{ $prescription->prestataire->nom }}</td>
+                            <td>{{ $prescription->prescription }}</td>
+                            <td>{{ $prescription->date }}</td>
+                            <td>{{ $prescription->montant }}</td>
                             
                         </tr>
-                    @endforeach
+                    @endforeach  
 
                 </tbody>
               </table>
@@ -56,7 +56,7 @@
 
             <div  class="card-footer">
                 <div  class="float-right">
-                    {{ $soins->links() }}
+                    {{ $presciptions->links() }}
                 </div> 
             </div>   
 

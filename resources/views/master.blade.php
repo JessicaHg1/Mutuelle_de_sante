@@ -179,7 +179,7 @@
       </li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#cotisation-nav" data-bs-toggle="collapse" href="{{ route('cotisations') }}">
+        <a class="nav-link collapsed" href="{{ route('cotisations') }}">
           <i class="bi bi-piggy-bank-fill"></i><span>Cotisations</span>
         </a>
        
@@ -191,6 +191,13 @@
         <a class="nav-link collapsed"  href="{{ route('soins') }}">
           <i class="bi bi-umbrella-fill"></i>
           <span>Soins</span>
+        </a>   
+      </li>  
+
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="{{ route('prescriptions') }}">
+          <i class="bi bi-umbrella-fill"></i>
+          <span>Prescriptions</span>
         </a>   
       </li>  
       @endcan

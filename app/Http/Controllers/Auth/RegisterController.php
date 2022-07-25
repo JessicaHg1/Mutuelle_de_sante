@@ -76,5 +76,7 @@ class RegisterController extends Controller
             'sexe' => $data['sexe'],
             'password' => Hash::make($data['password'] = 'password'),
         ]);
+
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Utilisateur ajouté avec succès !"]);
     }
 }

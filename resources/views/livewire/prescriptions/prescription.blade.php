@@ -1,9 +1,9 @@
 <div>
     @if ($currentPage == PAGEAJOUTER)
-        @include("livewire.cotisations.ajouter")
+        @include("livewire.prescriptions.ajouter")
     @endif
 
     @if($currentPage == PAGELISTE)
-        @include("livewire.cotisations.liste")
+        @include("livewire.prescriptions.liste")
     @endif
 </div>

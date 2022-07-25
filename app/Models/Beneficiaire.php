@@ -33,4 +33,9 @@ class Beneficiaire extends Model
     {
         return $this->hasMany(Soins::class);
     }
+
+    public function cotisations()
+    {
+        return $this->hasMany(Cotisation::class);
+    }
 }

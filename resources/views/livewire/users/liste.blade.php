@@ -7,7 +7,7 @@
                     </h3>
 
                     <!--<div class="card-tools align-items-center">
-                        <a class="btn text-white" wire:click.prevent='ajouterUser()'>
+                        <a class="btn text-white">
                             <i class="bi bi-person-plus-fill"></i>
                             <span>Ajouter un utilisateur</span>
                         </a>
