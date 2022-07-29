@@ -144,19 +144,21 @@
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Line Chart</h5>
+                <h5 class="card-title">Nombre d'utilisateurs ajouté dans le mois</h5>
 
                 <!-- Line Chart -->
                 <canvas id="lineChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 333px; width: 666px;" width="666" height="333"></canvas>
                 <script>
+                    var mois = <?php echo json_encode($mois) ?>;
+                    var users = <?php echo json_encode($usersNb) ?>;
                   document.addEventListener("DOMContentLoaded", () => {
                     new Chart(document.querySelector('#lineChart'), {
                       type: 'line',
                       data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        labels: mois,
                         datasets: [{
                           label: 'Line Chart',
-                          data: [65, 59, 80, 81, 56, 55, 40],
+                          data: users,
                           fill: false,
                           borderColor: 'rgb(75, 192, 192)',
                           tension: 0.1
@@ -181,19 +183,21 @@
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Bar CHart</h5>
+                <h5 class="card-title">Nombre de mutuelles enregistré par région</h5>
 
                 <!-- Bar Chart -->
                 <canvas id="barChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 333px; width: 666px;" width="666" height="333"></canvas>
                 <script>
+
+                  var mutuelleData = <?php echo json_encode($mutuelleData); ?>;
                   document.addEventListener("DOMContentLoaded", () => {
                     new Chart(document.querySelector('#barChart'), {
                       type: 'bar',
                       data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        labels: ['Maritime', 'Plateaux', 'Centrale', 'Kara', 'Savanes'],
                         datasets: [{
                           label: 'Bar Chart',
-                          data: [65, 59, 80, 81, 56, 55, 40],
+                          data: mutuelleData,
                           backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(255, 159, 64, 0.2)',
@@ -231,80 +235,16 @@
             </div>
           </div>
 
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Pie Chart</h5>
-
-                <!-- Pie Chart -->
-                <canvas id="pieChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 400px; width: 666px;" width="666" height="400"></canvas>
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    new Chart(document.querySelector('#pieChart'), {
-                      type: 'pie',
-                      data: {
-                        labels: [
-                          'Red',
-                          'Blue',
-                          'Yellow'
-                        ],
-                        datasets: [{
-                          label: 'My First Dataset',
-                          data: [300, 50, 100],
-                          backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                          ],
-                          hoverOffset: 4
-                        }]
-                      }
-                    });
-                  });
-                </script>
-                <!-- End Pie CHart -->
-
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Doughnut Chart</h5>
-
-                <!-- Doughnut Chart -->
-                <canvas id="doughnutChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 400px; width: 666px;" width="666" height="400"></canvas>
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    new Chart(document.querySelector('#doughnutChart'), {
-                      type: 'doughnut',
-                      data: {
-                        labels: [
-                          'Red',
-                          'Blue',
-                          'Yellow'
-                        ],
-                        datasets: [{
-                          label: 'My First Dataset',
-                          data: [300, 50, 100],
-                          backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                          ],
-                          hoverOffset: 4
-                        }]
-                      }
-                    });
-                  });
-                </script>
-                <!-- End Doughnut CHart -->
-
-              </div>
-            </div>
-          </div>
-
         </div>
     </section>    
 </div>
+
+<script type="tet/javascript">
+
+
+
+</script>
+<script src="{{ asset('asset/vendor/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('asset/vendor/chart.js/chart.min.js') }}"></script>
+<script src="{{ asset('asset/vendor/echarts/echarts.min.js') }}"></script>

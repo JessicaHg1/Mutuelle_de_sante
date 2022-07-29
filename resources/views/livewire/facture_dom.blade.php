@@ -7,14 +7,31 @@
     </head>
 
     <body>
-        <h1>Facture</h1>
+        <h1>Facture proforma</h1>
 
         <div class="address">
             <div class="address_label">De</div>
             <div class="address_content">
-                <strong>retyuruiry</strong>
+                <strong>Nom et prénom</strong>
                 <p>retyuruirydvhfjkhsfgh<br/>
-                retyuruirydvhfjkhsfgh<br/>
+                retyuruirydvhfjkhsfgh</p>
+            </div>
+        </div>
+
+        <div class="addres">
+            <div class="address_label">Pour</div>
+            <div class="address_content">
+                <strong>Nom et prénom</strong>
+                <p>retyuruirydvhfjkhsfgh<br/>
+                retyuruirydvhfjkhsfgh</p>
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="info_label">Facture n° 1</div>
+            <div class="info_content">
+                
+                <p>retyuruirydvhfjkhsfgh<br/>
                 retyuruirydvhfjkhsfgh</p>
             </div>
         </div>
@@ -74,6 +91,7 @@
               <!-- End Bordered Table -->
 
             </div>
+
     </body> 
    
 </html> 

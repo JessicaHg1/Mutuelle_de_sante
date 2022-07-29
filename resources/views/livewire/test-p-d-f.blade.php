@@ -1,4 +1,6 @@
 <div class="card">
+
+
             
                 <div class="card-header bg-secondary d-flex align-items-center">
                     <h3 class="card-title flex-grow-1 text-white">
@@ -7,7 +9,7 @@
                     </h3>
 
                     <div class="card-tools align-items-center">
-                        <a class="btn text-white" href="/test-p-d-f_pdf/pdf">
+                        <a class="btn text-white" href="{{ route('test-p-d-f_pdf') }}">
                             <span>Exporter en PDF</span>
                         </a>
                     </div>

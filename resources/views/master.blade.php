@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
@@ -128,10 +128,10 @@
       </li><!-- End Dashboard Nav -->
       
      
-      @can("admin")
+      @can("superadmin")
       <li class="nav-item">
         <a href="{{ route('utilisateurs') }}" class="nav-link collapsed">
-          <i class="bi bi-person-fill"></i>
+          <i class="bi bi-person"></i>
           <span>Utilisateurs</span>
         </a>
       </li>
@@ -142,27 +142,6 @@
           <span>Mutuelles de santé</span>
         </a>   
       </li> 
-      @endcan
-
-      @can("secretaire")
-      <li class="nav-item ">
-        <a class="nav-link collapsed " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="ri ri-team-line"></i><span>Bénéficiaires</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ route('beneficiaires.adherents') }}" class="nav-link collapsed ">
-              <i class="ri ri-team-line"></i><span>Adhérents</span>
-            </a>
-          </li>
-
-           <li>
-            <a href="{{ route('beneficiaires.beneficiaire') }}" class="nav-link collapsed ">
-              <i class="ri ri-team-line"></i><span>Personnes à charge</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed"  href="{{ route('prestataires') }}">
@@ -170,37 +149,77 @@
           <span>Prestataires de soins</span>
         </a>   
       </li>
+      @endcan
+
+      @can("admin")
+        <li class="nav-item">
+        <a href="{{ route('utilisateurs') }}" class="nav-link collapsed">
+          <i class="bi bi-person"></i>
+          <span>Utilisateurs</span>
+        </a>
+      </li>
+      @endcan
+
+      @can("secretaire")
+    
+          <li class="nav-item">
+            <a href="{{ route('beneficiaires.adherents') }}" class="nav-link collapsed ">
+              <i class="ri ri-team-line"></i><span>Adhérents</span>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="{{ route('beneficiaires.beneficiaire') }}" class="nav-link collapsed ">
+              <i class="ri ri-team-line"></i><span>Personnes à charge</span>
+            </a>
+          </li>
+        
+      </li><!-- End Forms Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed"  href="{{ route('prestations') }}">
-          <i class="bi bi-umbrella-fill"></i>
+          <i class="bi bi-umbrella"></i>
           <span>Prestations</span>
         </a>   
       </li>
       
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('cotisations') }}">
-          <i class="bi bi-piggy-bank-fill"></i><span>Cotisations</span>
+          <i class="bi bi-piggy-bank"></i>
+          <span>Cotisations</span>
         </a>
-       
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="{{ route('soins') }}">
+          <i class="bi bi-umbrella"></i>
+          <span>Soins</span>
+        </a>   
       </li>  
       @endcan             
       
       @can("prestataire")
       <li class="nav-item">
         <a class="nav-link collapsed"  href="{{ route('soins') }}">
-          <i class="bi bi-umbrella-fill"></i>
+          <i class="bi bi-umbrella"></i>
           <span>Soins</span>
         </a>   
       </li>  
 
       <li class="nav-item">
         <a class="nav-link collapsed"  href="{{ route('prescriptions') }}">
-          <i class="bi bi-umbrella-fill"></i>
+          <i class="bi bi-journal-text"></i>
           <span>Prescriptions</span>
         </a>   
       </li>  
       @endcan
+
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Statistiques</span>
+        </a>   
+      </li>  
       
       
     </ul>
@@ -230,10 +249,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   
   <!-- Vendor JS Files -->
-  <script src="{{ asset('asset/vendor/apexcharts/apexcharts.min.js') }}"></script>
-  <script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('asset/vendor/chart.js/chart.min.js') }}"></script>
-  <script src="{{ asset('asset/vendor/echarts/echarts.min.js') }}"></script>
+ 
   <script src="{{ asset('asset/vendor/quill/quill.min.js') }}"></script>
   <script src="{{ asset('asset/vendor/simple-datatables/simple-datatables.js') }}"></script>
   <script src="{{ asset('asset/vendor/tinymce/tinymce.min.js') }}"></script>

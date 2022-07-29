@@ -6,12 +6,12 @@
                     Liste des utilisateurs
                     </h3>
 
-                    <!--<div class="card-tools align-items-center">
-                        <a class="btn text-white">
+                    <div class="card-tools align-items-center">
+                        <a class="btn text-white" wire:click.prevent='ajouterUser()'>
                             <i class="bi bi-person-plus-fill"></i>
-                            <span>Ajouter un utilisateur</span>
+                            <span>Ajouter un utilisateur</span> 
                         </a>
-                    </div>-->
+                    </div>
 
                     <div class="search-bar">
                         <form class="search-form d-flex align-items-center" method="" action="#">
@@ -29,10 +29,9 @@
                     <th scope="col">#</th>
                     <th scope="col">Utilisateurs</th>
                     <th scope="col">sexe</th>
-                    <th scope="col">Rôles</th>
-                    
                     <th scope="col">Téléphone</th>
-                    
+                    <th scope="col">Rôles</th>
+                    <th scope="col">Mutuelle</th>
                     <th class="text-center">Action</th>
                   </tr>
                 </thead>
@@ -43,14 +42,14 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->sexe }}</td>
+                            <td>{{ $user->tel }}</td>
                             <td>
                                 @foreach ($user->role as $role)
                                     {{ $role->nom }} |
                                     
                                 @endforeach
                             </td>
-                            
-                            <td>{{ $user->tel }}</td>
+                            <td>{{ $user->mutuelle->nom }}</td>
                             <td class="text-center">
                               <button class="btn btn-link" wire:click='editerUser({{ $user->id }})'><i class="bi bi-pencil-square"></i></button>
                               <button class="btn btn-link" wire:click='confirmDelete("{{ $user->name }}", {{ $user->id }})'><i class="bi bi-trash-fill"></i></button>

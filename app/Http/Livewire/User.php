@@ -9,6 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Validation\Rule as ValidationRule;
 use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Component
 {
@@ -19,6 +20,8 @@ class User extends Component
     public $currentPage = PAGELISTE;
 
     public $search = "";
+
+    public $newUser = [];
 
     public $editUser = [];
 
@@ -31,10 +34,18 @@ class User extends Component
                 'editUser.name' => 'required',
                 'editUser.sexe' => 'required',
                 'editUser.mutuelle_id' => 'required',
-                'editUser.tel' => ['required', 'numeric', 'min:70000000', ValidationRule::unique("users", "tel")->ignore($this->editUser['id'])],
+                'editUser.tel' => ['required', 'numeric', 'min:8', 'max:15', ValidationRule::unique("users", "tel")->ignore($this->editUser['id'])],
                 'editUser.email' => ['required', 'email', ValidationRule::unique("users", "email")->ignore($this->editUser['id'])],
             ];
         }
+        return [
+            'newUser.name' => ['required'],
+            'newUser.sexe' => ['required'],
+            'newUser.mutuelle_id' => ['required'],
+            'newUser.tel' => ['required', 'numeric', 'min:8', 'max:15', 'unique:users,tel'],
+            'newUser.email' => ['required', 'email',  'unique:users,email'],
+            'newUser.password' => ['string', 'min:8'],
+        ];
     }
 
     public function render()
@@ -51,6 +62,29 @@ class User extends Component
         return view('livewire.users.user', $data, compact('mutuelles'))
             ->extends('master')
             ->section('content');
+    }
+
+    public function ajouterUser()
+    {
+        $this->currentPage = PAGEAJOUTER;
+    }
+
+    public function addUser()
+    {
+        $validationAttributes = $this->validate();
+
+        ModelsUser::create([
+            "name" => $validationAttributes["newUser"]["name"],
+            "sexe" => $validationAttributes["newUser"]["sexe"],
+            "tel" => $validationAttributes["newUser"]["tel"],
+            "email" => $validationAttributes["newUser"]["email"],
+            "mutuelle_id" => $validationAttributes["newUser"]["mutuelle_id"],
+            "password" => Hash::make($validationAttributes["newUser"]["password"] = 'password')
+        ]);
+
+        $this->newUser = [];
+
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Utilisateur ajouté avec succès !"]);
     }
 
     public function editerUser($id)
@@ -108,7 +142,7 @@ class User extends Component
             }
         }
 
-        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Rôles et permissions mis à jour avec succès !"]);
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Rôle et permission mis à jour avec succès !"]);
     }
 
     public function updateUser()

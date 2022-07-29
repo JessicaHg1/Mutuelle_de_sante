@@ -52,18 +52,17 @@ class Adherent extends Component
         return [
             'newAdherent.name' => 'required',
             'newAdherent.type_adhesion' => 'required',
-            'newAdherent.tel' => 'required | unique:adherents,tel',
+            'newAdherent.tel' => 'required | min:8| max:13 | unique:adherents,tel',
             'newAdherent.code' => 'required | unique:adherents,code',
             'newAdherent.sexe' => 'required',
-            'newAdherent.date_naiss' => 'required',
+            'newAdherent.date_naiss' => 'required | date | after: 01/01/1950',
             'newAdherent.lieu_naiss' => 'required',
-            'newAdherent.date_inscription' => 'required',
+            'newAdherent.date_inscription' => 'required | date | after: 01/01/2000',
             'newAdherent.sit_matri' => 'required',
             'newAdherent.profession' => 'required',
             'newAdherent.adresse_domicile' => 'required',
             'newAdherent.adresse_service' => 'string',
             'newAdherent.personne_a_prevenir' => 'required',
-            'newAdherent.mutuelle_id' => 'required',
             'newAdherent.nationalite' => 'required',
         ];
     }
@@ -102,32 +101,9 @@ class Adherent extends Component
     {
         $validationAttributes = $this->validate();
 
-        $imagePath = "";
-
-        if ($this->addPhoto != null) {
-            $imagePath =  $this->addPhoto->store('upload', 'public');
-        }
-
-        ModelsAdherent::create([
-            "name" => $validationAttributes["newAdherent"]["name"],
-            "sexe" => $validationAttributes["newAdherent"]["sexe"],
-            "type_adhesion" => $validationAttributes["newAdherent"]["type_adhesion"],
-            "tel" => $validationAttributes["newAdherent"]["tel"],
-            "code" => $validationAttributes["newAdherent"]["code"],
-            "date_naiss" => $validationAttributes["newAdherent"]["date_naiss"],
-            "lieu_naiss" => $validationAttributes["newAdherent"]["lieu_naiss"],
-            "profession" => $validationAttributes["newAdherent"]["profession"],
-            "sit_matri" => $validationAttributes["newAdherent"]["sit_matri"],
-            "nationalite" => $validationAttributes["newAdherent"]["nationalite"],
-            "mutuelle_id" => $validationAttributes["newAdherent"]["mutuelle_id"],
-            "adresse_domicile" => $validationAttributes["newAdherent"]["adresse_domicile"],
-            "personne_a_prevenir" => $validationAttributes["newAdherent"]["personne_a_prevenir"],
-            "date_inscription" => $validationAttributes["newAdherent"]["date_inscription"],
-            "photo" => $imagePath
-        ]);
+        ModelsAdherent::create($validationAttributes["newAdherent"]);
 
         $this->newAdherent = [];
-        $this->addPhoto = null;
 
         $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Adhérent ajouté avec succès !"]);
     }

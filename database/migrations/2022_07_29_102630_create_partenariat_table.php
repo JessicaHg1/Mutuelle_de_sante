@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCotisationsTable extends Migration
+class CreatePartenariatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCotisationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cotisations', function (Blueprint $table) {
+        Schema::create('partenariat', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('mutuelle_id');
+            $table->foreignId('prestataire_id');
             $table->date('date');
-            $table->integer('montant');
-            $table->boolean('etat')->nullable();
-            $table->foreignId('beneficiaire_id')->constrained('beneficiaires');
             $table->timestamps();
         });
 
@@ -32,10 +31,10 @@ class CreateCotisationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('cotisations', function (Blueprint $table) {
-            $table->dropConstrainedForeign('beneficiaire_id');
+        Schema::table('partenariat', function (Blueprint $table) {
+            $table->dropConstrainedForeign('mutuelle_id', 'prestataire_id');
         });
 
-        Schema::dropIfExists('cotisations');
+        Schema::dropIfExists('partenariat');
     }
 }

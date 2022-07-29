@@ -52,7 +52,8 @@
           <li><a class="nav-link scrollto" href="#about">A propos</a></li>
           <li><a class="nav-link scrollto" href="#services">Quelques fonctionalités</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-           <li><a class="nav-link scrollto" href="{{ route('register') }}">S'enregistrer sur MUT-ASSUR</a></li>
+           <!--li><a class="nav-link scrollto" href="{{ route('register') }}">
+           Enregistrer un utilisateur sur MUT-ASSUR</a></li>-->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -78,7 +79,7 @@
 
         <div class="section-title">
           <h2>A propos</h2>
-          <h3 class="title-title">Gérez facilement et efficacemment votre mutuelle de santé avec le logiciel MUT-ASSUR.</h3>
+          <h3 class="title-title">Gérez facilement et efficacemment votre mutuelle de santé avec notre logiciel MUT-ASSUR.</h3>
         </div>
 
         <div class="col-lg-12 text-center">
@@ -88,7 +89,7 @@
             
               Gestion des adhérents et de leurs personnes à charge,
               suivi des cotisations,
-              gestion des prestataires des prestations,
+              gestion des prestataires, des prestations,
               gestion des soins administrés aux bénéficiaires.
             </p>
         </div>   
@@ -109,8 +110,8 @@
             <div class="icon-box">
               <div class="icon"><i class="bi bi-people-fill"></i></div>
               <h4 class="title"><a href="">ADHÉSION</a></h4>
-              <p class="description">ASSURÉ PRINCIPAL, PERSONNES À CHARGE, SUSPENSIONS, DÉPARTS... Créez la fiche détaillée de vos 
-              assurés principaux, ajouter leurs personnes à charge, imprimer les cartes des bénéficiaires...</p>
+              <p class="description">ASSURÉ PRINCIPAL, PERSONNES À CHARGE... Créez la fiche détaillée de vos 
+              assurés principaux, ajouter leurs personnes à charge...</p>
             </div>
           </div>
 
@@ -118,8 +119,8 @@
             <div class="icon-box">
               <div class="icon"><i class="bi bi-piggy-bank-fill"></i></div>
               <h4 class="title"><a href="">COTISATIONS</a></h4>
-              <p class="description">APPEL ET RECOUVREMENTS DES COTISATIONS, RAPPEL DE COTISATION PAR SMS... Faites le suivi et 
-              le recouvrement. Alertes automatiques des assurés à l'approche des échéances de cotisation...</p>
+              <p class="description">APPEL ET RECOUVREMENTS DES COTISATIONS... Faites le suivi et 
+              le recouvrement...</p>
             </div>
           </div>
 
@@ -155,27 +156,40 @@
           <h3>Contactez <span>nous</span></h3>
         </div>
 
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-6">
             <div class="info">
-              <div class="address">
+              <div class="phone">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Localisation</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <p>04 rue des merveilles</p>
               </div>
+            </div>
+          </div>
 
+          <div class="col-lg-4 col-md-4 col-6">
+            <div class="info">
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email</h4>
-                <p>info@example.com</p>
+                <p>kpavuvujess@gmail.com</p>
               </div>
+            </div>
+          </div>
 
+          <div class="col-lg-4 col-md-4 col-6">
+            <div class="info">
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Téléphone</h4>
-                <p>+1 5589 55488 55s</p>
+                <p>+228 70367074</p>
               </div>
-
             </div>
+          </div>
 
+
+          
+        </div> 
       </div>
     </section><!-- End Contact Section -->
 
@@ -188,7 +202,7 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>Tempo</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>zoetechgroup</span></strong>. All Rights Reserved.
         </div>
         {{--<div class="credits">
           <!-- All the links in the footer should remain intact. -->

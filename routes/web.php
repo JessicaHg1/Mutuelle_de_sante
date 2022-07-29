@@ -39,6 +39,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/utilisateurs', User::class)->name('utilisateurs');
 
+Route::get('/utilisateur', [App\Http\Controllers\Auth\RegisterController::class, 'create'])->name('utilisateur');
+
 Route::get('/mutuelles', Mutuelle::class)->name('mutuelles');
 
 Route::get('/prestations', Prestation::class)->name('prestations');
@@ -55,7 +57,11 @@ Route::get('/dashbord', Dashboard::class)->name('dashboard');
 
 Route::get('/pdf', TestPDF::class)->name('pdf');
 
-Route::get('/test-p-d-f_pdf/pdf', [TestPDF::class, 'listeTestPdf'])->name('test-p-d-f_pdf/pdf');
+Route::get('/test-p-d-f_pdf', [TestPDF::class, 'listeTestPdf'])->name('test-p-d-f_pdf');
+
+Route::get('/test2', [TestPDF::class, 'test2'])->name('test2');
+
+Route::get('/facture_test', [TestPDF::class, 'factureDom'])->name('facture_test');
 
 
 Route::group(

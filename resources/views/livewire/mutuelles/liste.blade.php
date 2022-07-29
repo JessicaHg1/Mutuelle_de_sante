@@ -27,7 +27,7 @@
               <table class="table table-striped">
                 <thead>
                    <tr>
-                    <th scope="col">Logo</th>
+                    
                     <th scope="col">Mutuelle de santé</th>
                     <th scope="col">Région</th>
                     <th scope="col">Adresse</th>
@@ -82,7 +82,7 @@
           cancelButtonText: 'Annuler',
         }).then((result) => {
           if (result.isConfirmed) {
-            @this.delete( event.detail.message.data.mutuelle_id)
+            @this.delete( event.detail.message.data.prestataire_id)
           }
         })
     window.addEventListener("showSuccessMessage", event =>{

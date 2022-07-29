@@ -20,7 +20,6 @@ class CreateSoinsTable extends Migration
             $table->integer('montant');
             $table->foreignId('prestataire_id')->constrained('prestataires');
             $table->foreignId('prestation_id')->constrained('prestations');
-            $table->foreignId('adherent_id')->constrained('adherents');
             $table->foreignId('beneficiaire_id')->constrained('beneficiaires');
             $table->timestamps();
         });
@@ -36,7 +35,7 @@ class CreateSoinsTable extends Migration
     public function down()
     {
         Schema::table('soins', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('prestataire_id', 'prestation_id', 'adherent_id', 'beneficiaire_id');
+            $table->dropConstrainedForeignId('prestataire_id', 'prestation_id', 'beneficiaire_id');
         });
 
         Schema::dropIfExists('soins');

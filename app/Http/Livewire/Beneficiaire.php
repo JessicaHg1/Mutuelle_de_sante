@@ -44,7 +44,7 @@ class Beneficiaire extends Component
         }
         return [
             'newBenef.name' => 'required',
-            'newBenef.code' => 'required | unique:adherents,code',
+            'newBenef.code' => 'required | unique:beneficiaires,code',
             'newBenef.sexe' => 'required',
             'newBenef.date_naiss' => 'required',
             'newBenef.lieu_naiss' => 'required',

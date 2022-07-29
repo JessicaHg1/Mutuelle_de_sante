@@ -27,8 +27,11 @@ class CreateMutuellesTable extends Migration
             $table->integer('montant_adhesion');
             $table->string('periode_observation');
             $table->string('periodicite_cotisation');
+            $table->foreignId('pays_id');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -38,6 +41,10 @@ class CreateMutuellesTable extends Migration
      */
     public function down()
     {
+        Schema::table('mutuelles', function (Blueprint $table) {
+            $table->dropConstrainedForeign('pays_id');
+        });
+
         Schema::dropIfExists('mutuelles');
     }
 }

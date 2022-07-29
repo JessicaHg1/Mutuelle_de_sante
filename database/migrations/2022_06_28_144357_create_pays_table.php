@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddBenefToTableSoin extends Migration
+class CreatePaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateAddBenefToTableSoin extends Migration
      */
     public function up()
     {
-        Schema::table('soins', function (Blueprint $table) {
-            $table->string('benef');
+        Schema::create('pays', function (Blueprint $table) {
+            $table->id();
+            $table->string('nom');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class CreateAddBenefToTableSoin extends Migration
      */
     public function down()
     {
-        Schema::table('soins', function (Blueprint $table) {
-            $table->dropColumn('benef');
-        });
+        Schema::dropIfExists('pays');
     }
 }

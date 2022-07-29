@@ -29,4 +29,23 @@ class TestPDF extends Component
 
         return $pdf->download('livewire.test-p-d-f.pdf');
     }
+
+    public function test2()
+    {
+        ob_start();
+
+        $content = ob_get_clean();
+
+        $pdf = new\mikehaertl\wkhtmlto\PDF();
+
+        return view('livewire.test2');
+    }
+
+    public function factureDom()
+    {
+
+        return view('livewire.facture_dom')
+            ->extends('master')
+            ->section('content');
+    }
 }

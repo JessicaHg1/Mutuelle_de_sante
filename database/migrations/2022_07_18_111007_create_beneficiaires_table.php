@@ -20,11 +20,19 @@ class CreateBeneficiairesTable extends Migration
             $table->char('sexe');
             $table->date('date_naiss');
             $table->string('lieu_naiss');
-            $table->string('nationalite')->nullable();
-            $table->date('date_inscription')->nullable();
+            $table->string('nationalite');
+            $table->date('date_inscription');
             $table->date('date_depart')->nullable();
             $table->string('photo')->nullable();
-            $table->foreignId('adherent_id')->constrained('adherents');
+            $table->string('type_adhesion')->nullable();
+            $table->integer('tel')->nullable();
+            $table->string('profession')->nullable();
+            $table->string('sit_matri')->nullable();
+            $table->string('adresse_service')->nullable();
+            $table->string('adresse_domicile')->nullable();
+            $table->string('personne_a_prevenir')->nullable();
+            $table->foreignId('mutuelle_id')->constrained('mutuelles')->nullable();
+            $table->foreignId('beneficiaire_id')->constrained('beneficiaires');
             $table->timestamps();
         });
 
@@ -39,7 +47,7 @@ class CreateBeneficiairesTable extends Migration
     public function down()
     {
         Schema::table('beneficiaires', function (Blueprint $table) {
-            $table->dropConstrainedForeign('adherent_id');
+            $table->dropConstrainedForeign('mutuelle_id', 'beneficiaire_id');
         });
 
         Schema::dropIfExists('beneficiaires');

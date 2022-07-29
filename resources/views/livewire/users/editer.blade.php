@@ -124,15 +124,13 @@
           </div>
         </div>
 </div>
-
-
 <script>
     window.addEventListener("showSuccessMessage", event =>{
      Swal.fire({
       position: 'top-end',
       icon: 'success',
       toast:'true',
-      title: event.detail.message || "Opération effectuée avec succès !",
+      title: event.detail.message,
       showConfirmButton: false,
       timer: 3000
     })

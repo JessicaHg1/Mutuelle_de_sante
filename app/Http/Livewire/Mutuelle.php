@@ -47,15 +47,15 @@ class Mutuelle extends Component
         return [
             'newMutuelle.nom' => 'required | unique:mutuelles,nom',
             'newMutuelle.region' => 'required',
-            'newMutuelle.adresse' => 'required',
-            'newMutuelle.email' => 'required | unique:mutuelles,email',
-            'newMutuelle.montant_cotisation' => 'required',
+            'newMutuelle.adresse' => 'required | string',
+            'newMutuelle.email' => 'required | unique:mutuelles,email, | max:200',
+            'newMutuelle.montant_cotisation' => 'required | numeric',
             'newMutuelle.tel' => 'required | numeric |min:70000000| max:99999999 | unique:mutuelles,tel',
-            'newMutuelle.date_creation' => 'required | min: 01/01/1990',
-            'newMutuelle.nb_pers_a_charge_admis' => 'required',
-            'newMutuelle.montant_adhesion' => 'required',
-            'newMutuelle.periode_observation' => 'required',
-            'newMutuelle.periodicite_cotisation' => 'required',
+            'newMutuelle.date_creation' => 'required | after: 01/01/1990 ',
+            'newMutuelle.nb_pers_a_charge_admis' => 'required | numeric',
+            'newMutuelle.montant_adhesion' => 'required | numeric',
+            'newMutuelle.periode_observation' => 'required | numeric',
+            'newMutuelle.periodicite_cotisation' => 'required | numeric',
 
         ];
     }
@@ -120,31 +120,11 @@ class Mutuelle extends Component
     {
         $validationAttributes = $this->validate();
 
-        $imagePath = "";
-
-        if ($this->addLogo != null) {
-            $imagePath =  $this->addLogo->store('upload', 'public');
-        }
-
-        ModelsMutuelle::create([
-            "nom" => $validationAttributes["newMutuelle"]["nom"],
-            "region" => $validationAttributes["newMutuelle"]["region"],
-            "adresse" => $validationAttributes["newMutuelle"]["adresse"],
-            "email" => $validationAttributes["newMutuelle"]["email"],
-            "tel" => $validationAttributes["newMutuelle"]["tel"],
-            "montant_cotisation" => $validationAttributes["newMutuelle"]["montant_cotisation"],
-            "date_creation" => $validationAttributes["newMutuelle"]["date_creation"],
-            "nb_pers_a_charge_admis" => $validationAttributes["newMutuelle"]["nb_pers_a_charge_admis"],
-            "montant_adhesion" => $validationAttributes["newMutuelle"]["montant_adhesion"],
-            "periode_observation" => $validationAttributes["newMutuelle"]["periode_observation"],
-            "periodicite_cotisation" => $validationAttributes["newMutuelle"]["periodicite_cotisation"],
-            "logo" => $imagePath
-        ]);
+        ModelsMutuelle::create($validationAttributes["newMutuelle"]);
 
         $this->newMutuelle = [];
-        $this->addLogo = null;
 
-        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Mutuelle ajoutée avec succès !"]);
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Mutuelle enregistrée avec succès !"]);
     }
 
     public function confirmDelete($name, $id)
