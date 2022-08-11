@@ -31,31 +31,31 @@
                     <th scope="col">sexe</th>
                     <th scope="col">Téléphone</th>
                     <th scope="col">Rôles</th>
-                    <th scope="col">Mutuelle</th>
                     <th class="text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  
-                    @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->sexe }}</td>
-                            <td>{{ $user->tel }}</td>
-                            <td>
-                                @foreach ($user->role as $role)
-                                    {{ $role->nom }} |
-                                    
-                                @endforeach
-                            </td>
-                            <td>{{ $user->mutuelle->nom }}</td>
-                            <td class="text-center">
-                              <button class="btn btn-link" wire:click='editerUser({{ $user->id }})'><i class="bi bi-pencil-square"></i></button>
-                              <button class="btn btn-link" wire:click='confirmDelete("{{ $user->name }}", {{ $user->id }})'><i class="bi bi-trash-fill"></i></button>
-                            </td>
-                        </tr>
-                    @endforeach
+                       
+                        @foreach ($usersm as $user)
+            
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->sexe }}</td>
+                                    <td>{{ $user->tel }}</td>
+                                    <td>
+                                        @foreach ($user->role as $role)
+                                            {{ $role->nom }} |
+                                            
+                                        @endforeach
+                                    </td>
+                                    <td class="text-center">
+                                    <button class="btn btn-link" wire:click='editerUser({{ $user->id }})'><i class="bi bi-pencil-square"></i></button>
+                                    <button class="btn btn-link" wire:click='confirmDelete("{{ $user->name }}", {{ $user->id }})'><i class="bi bi-trash-fill"></i></button>
+                                    </td>
+                                </tr>  
+                                 
+                        @endforeach  
 
                 </tbody>
               </table>

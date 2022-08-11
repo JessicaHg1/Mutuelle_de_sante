@@ -21,6 +21,24 @@
                 </div>
 
                 <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Pays</label>
+                  <div class="col-sm-8">
+                    <select class="form-select @error('newMutuelle.pays_id') is-invalid 
+                        @enderror" wire:model='newMutuelle.pays_id' aria-label="Default select example">
+                      <option selected>Choisir</option> 
+                        @foreach ($pays as $pays)
+                          <option value="{{ $pays->id }}">{{ $pays->nom}}</option>
+                        @endforeach
+                        @error('newMutuelle.pays_id')
+                          <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
+                    </select>  
+                  </div>    
+                </div>
+
+                <div class="row mb-3">
                   <label class="col-sm-4 col-form-label">Région</label>
                   <div class="col-sm-8">
                     <select class="form-select @error('newMutuelle.region') is-invalid 
@@ -115,58 +133,64 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-4 col-form-label">Montant d'adhésion</label>
                   <div class="col-sm-8">
-                    <input type="muneric" class="form-control @error('newMutuelle.montant_adhesion') is-invalid 
+                    <div class="input-group">
+                      <span class="input-group-text">FCFA</span>
+                      <input type="numeric" class="form-control @error('newMutuelle.montant_adhesion') is-invalid 
                       @enderror" wire:model='newMutuelle.montant_adhesion'>
                       @error('newMutuelle.montant_adhesion')
                         <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                         </span>
                       @enderror
+                    </div>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-4 col-form-label">Montant de la cotisation</label>
                   <div class="col-sm-8">
-                    <input type="muneric" class="form-control @error('newMutuelle.montant_cotisation') is-invalid 
+                    <div class="input-group">
+                      <span class="input-group-text">FCFA</span>
+                      <input type="numeric" class="form-control @error('newMutuelle.montant_cotisation') is-invalid 
                       @enderror" wire:model='newMutuelle.montant_cotisation'>
                       @error('newMutuelle.montant_cotisation')
                         <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                         </span>
                       @enderror
+                    </div>  
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-4 col-form-label">Période d'observation</label>
-                  <div class="col-sm-6">
-                    <input type="muneric" class="form-control @error('newMutuelle.periode_observation') is-invalid 
+                  <div class="col-sm-8">
+                    <div class="input-group">
+                      <span class="input-group-text">Mois</span>
+                      <input type="numeric" class="form-control @error('newMutuelle.periode_observation') is-invalid 
                       @enderror" wire:model='newMutuelle.periode_observation'>
                       @error('newMutuelle.periode_observation')
                         <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                         </span>
                       @enderror
-                  </div>
-                  <div class="col-sm-2">
-                    <label for="inputText" class="col-sm-4 col-form-label">(Mois)</label>
+                    </div> 
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-4 col-form-label">Périodicité de cotisation</label>
-                  <div class="col-sm-6">
-                    <input type="muneric" class="form-control @error('newMutuelle.periodicite_cotisation') is-invalid 
+                  <div class="col-sm-8">
+                    <div class="input-group">
+                      <span class="input-group-text">Mois</span>
+                      <input type="numeric" class="form-control @error('newMutuelle.periodicite_cotisation') is-invalid 
                       @enderror" wire:model='newMutuelle.periodicite_cotisation'>
                       @error('newMutuelle.periodicite_cotisation')
                         <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                         </span>
                       @enderror
-                  </div>
-                  <div class="col-sm-2">
-                    <label for="inputText" class="col-sm-4 col-form-label">(Mois)</label>
+                    </div>
                   </div>
                 </div>
 

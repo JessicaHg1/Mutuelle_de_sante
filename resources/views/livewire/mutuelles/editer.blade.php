@@ -15,6 +15,24 @@
                 </div>
 
                 <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Pays</label>
+                  <div class="col-sm-8">
+                    <select class="form-select @error('editMutuelle.pays_id') is-invalid 
+                        @enderror" wire:model='editMutuelle.pays_id' aria-label="Default select example">
+                      <option selected>Choisir</option> 
+                        @foreach ($pays as $pays)
+                          <option value="{{ $pays->id }}">{{ $pays->nom}}</option>
+                        @endforeach
+                        @error('editMutuelle.pays_id')
+                          <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
+                    </select>  
+                  </div>    
+                </div>
+
+                <div class="row mb-3">
                   <label class="col-sm-4 col-form-label">Région</label>
                   <div class="col-sm-8">
                     <select class="form-select" wire:model='editMutuelle.region' aria-label="Default select example">

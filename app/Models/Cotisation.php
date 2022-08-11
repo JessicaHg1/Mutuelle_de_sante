@@ -19,13 +19,13 @@ class Cotisation extends Model
         'beneficiaire_id'
     ];
 
-    public function adherents()
-    {
-        return $this->belongsTo(Adherent::class, 'adherent_id', 'id');
-    }
-
-    public function beneficiaires()
+    public function beneficiaire()
     {
         return $this->belongsTo(Beneficiaire::class, 'beneficiaire_id', 'id');
+    }
+
+    public function adherent()
+    {
+        return $this->belongsTo(Adherent::class, 'adherent_id', 'id');
     }
 }

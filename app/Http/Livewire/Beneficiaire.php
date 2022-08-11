@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Beneficiaire as ModelsBeneficiaire;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -21,7 +22,14 @@ class Beneficiaire extends Component
 
     public $currentPage = PAGELISTE;
 
-    public $newBenef = [];
+    public $code = "";
+    public $name = "";
+    public $date_naiss = "";
+    public $lieu_naiss = "";
+    public $date_inscription = "";
+    public $nationalite = "";
+    public $sexe = "";
+    public $adherent_id = "";
 
     public $editBenef = [];
 
@@ -39,18 +47,18 @@ class Beneficiaire extends Component
                 'editBenef.adherent_id' => 'required',
                 'editBenef.nationalite' => 'required',
                 'editBenef.sexe' => 'required',
-                'editBenef.date_depart' => 'date',
+
             ];
         }
         return [
-            'newBenef.name' => 'required',
-            'newBenef.code' => 'required | unique:beneficiaires,code',
-            'newBenef.sexe' => 'required',
-            'newBenef.date_naiss' => 'required',
-            'newBenef.lieu_naiss' => 'required',
-            'newBenef.date_inscription' => 'required',
-            'newBenef.adherent_id' => 'required',
-            'newBenef.nationalite' => 'required',
+            'name' => 'required',
+            'code' => 'required | unique:beneficiaires,code',
+            'sexe' => 'required',
+            'date_naiss' => 'required',
+            'lieu_naiss' => 'required',
+            'date_inscription' => 'required',
+            'adherent_id' => 'integer',
+            'nationalite' => 'required',
         ];
     }
 
@@ -62,9 +70,16 @@ class Beneficiaire extends Component
 
         $searchCriteria = "%" . $this->search . "%";
 
+        $mut = auth()->user()->mutuelle->id;
+
+        $ad = FacadesDB::select('select adherents.mutuelle_id from mutuelles 
+        join users on mutuelles.id = users.mutuelle_id 
+        join adherents on adherents.mutuelle_id = mutuelles.id 
+        join beneficiaires on beneficiaires.adherent_id = adherents.id WHERE users.mutuelle_id = adherents.mutuelle_id 
+        group by beneficiaires.id');
+
         $data = [
-            "beneficiaires" => ModelsBeneficiaire::where("name", "like", $searchCriteria)
-                ->orWhere("sexe", "like", $searchCriteria)->paginate(5)
+            "beneficiaires" => ModelsBeneficiaire::where("adherent_id", $mut)->where("name", "like", $searchCriteria)->paginate(5)
         ];
 
         return view('livewire.beneficiaires.beneficiaire', $data, compact('adherents'))
@@ -81,7 +96,43 @@ class Beneficiaire extends Component
     {
         $this->currentPage = PAGELISTE;
 
-        $this->newBenef = [];
+        $this->name = "";
+        $this->sexe = "";
+        $this->code = "";
+        $this->adherent_id = "";
+        $this->date_naiss = "";
+        $this->lieu_naiss = "";
+        $this->date_inscription = "";
+        $this->nationalite = "";
+    }
+
+
+    public function addBeneficiaire()
+    {
+        $this->validate();
+
+        ModelsBeneficiaire::create([
+            "name" => $this->name,
+            "sexe" => $this->sexe,
+            "code" => $this->code,
+            "date_naiss" => $this->date_naiss,
+            "lieu_naiss" => $this->lieu_naiss,
+            "date_inscription" => $this->date_inscription,
+            "nationalite" => $this->nationalite,
+            "adherent_id" => $this->adherent_id,
+
+        ]);
+
+        $this->name = "";
+        $this->sexe = "";
+        $this->code = "";
+        $this->adherent_id = "";
+        $this->date_naiss = "";
+        $this->lieu_naiss = "";
+        $this->date_inscription = "";
+        $this->nationalite = "";
+
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Personne à charge ajoutée avec succès !"]);
     }
 
     public function editerBeneficiaire($id)
@@ -100,16 +151,6 @@ class Beneficiaire extends Component
         $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Personne à charge modifiée avec succès !"]);
     }
 
-    public function addBeneficiaire()
-    {
-        $validationAttributes = $this->validate();
-
-        ModelsBeneficiaire::create($validationAttributes["newBenef"]);
-
-        $this->newBenef = [];
-
-        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Personne à charge ajoutée avec succès !"]);
-    }
 
     public function confirmDelete($name, $id)
     {

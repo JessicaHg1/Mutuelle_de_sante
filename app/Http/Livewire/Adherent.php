@@ -4,9 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Adherent as ModelsAdherent;
 use Livewire\Component;
-use Illuminate\Validation\Rule as ValidationRule;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Validation\Rule as ValidationRule;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
 class Adherent extends Component
@@ -21,7 +21,22 @@ class Adherent extends Component
 
     public $currentPage = PAGELISTE;
 
-    public $newAdherent = [];
+    public $code = "";
+    public $name = "";
+    public $date_naiss = "";
+    public $lieu_naiss = "";
+    public $date_inscription = "";
+    public $profession = "";
+    public $nationalite = "";
+    public $sexe = "";
+    public $sit_matri = "";
+    public $adresse_domicile = "";
+    public $adresse_service = "";
+    public $personne_a_prevenir = "";
+    public $type_adhesion = "";
+    public $tel = "";
+
+    public $mut;
 
     public $addPhoto = null;
 
@@ -45,25 +60,25 @@ class Adherent extends Component
                 'editAdherent.adresse_domicile' => 'required',
                 'editAdherent.personne_a_prevenir' => 'required',
                 'editAdherent.mutuelle_id' => 'required',
-                'editAdherent.date_depart' => 'date',
             ];
         }
 
         return [
-            'newAdherent.name' => 'required',
-            'newAdherent.type_adhesion' => 'required',
-            'newAdherent.tel' => 'required | min:8| max:13 | unique:adherents,tel',
-            'newAdherent.code' => 'required | unique:adherents,code',
-            'newAdherent.sexe' => 'required',
-            'newAdherent.date_naiss' => 'required | date | after: 01/01/1950',
-            'newAdherent.lieu_naiss' => 'required',
-            'newAdherent.date_inscription' => 'required | date | after: 01/01/2000',
-            'newAdherent.sit_matri' => 'required',
-            'newAdherent.profession' => 'required',
-            'newAdherent.adresse_domicile' => 'required',
-            'newAdherent.adresse_service' => 'string',
-            'newAdherent.personne_a_prevenir' => 'required',
-            'newAdherent.nationalite' => 'required',
+            'name' => 'required',
+            'type_adhesion' => 'required',
+            'tel' => 'required | unique:adherents,tel',
+            'code' => 'required | unique:adherents,code',
+            'sexe' => 'required',
+            'date_naiss' => 'required',
+            'lieu_naiss' => 'required',
+            'date_inscription' => 'required',
+            'sit_matri' => 'required',
+            'profession' => 'required',
+            'adresse_domicile' => 'required',
+            'adresse_service' => 'string',
+            'personne_a_prevenir' => 'required',
+            'nationalite' => 'required',
+
         ];
     }
 
@@ -75,11 +90,11 @@ class Adherent extends Component
 
         $searchCriteria = "%" . $this->search . "%";
 
-        $data = [
-            "adherents" => ModelsAdherent::where("name", "like", $searchCriteria)
-                ->orWhere("sexe", "like", $searchCriteria)->paginate(5)
-        ];
+        $mut = auth()->user()->mutuelle->id;
 
+        $data = [
+            "adherents" => ModelsAdherent::where("mutuelle_id", $mut)->where("name", "like", $searchCriteria)->paginate(5)
+        ];
         return view('livewire.adherents.adherent', $data, compact('mutuelles'))
             ->extends('master')
             ->section('content');
@@ -94,54 +109,60 @@ class Adherent extends Component
     {
         $this->currentPage = PAGELISTE;
 
-        $this->newAdherent = [];
+        $this->name = "";
+        $this->sexe = "";
+        $this->code = "";
+        $this->tel = "";
+        $this->date_naiss = "";
+        $this->lieu_naiss = "";
+        $this->date_inscription = "";
+        $this->profession = "";
+        $this->nationalite = "";
+        $this->adresse_domicile = "";
+        $this->adresse_service = "";
+        $this->personne_a_prevenir = "";
+        $this->type_adhesion = "";
+        $this->sit_matri = "";
     }
 
     public function addAdherent()
     {
-        $validationAttributes = $this->validate();
+        $this->validate();
 
-        ModelsAdherent::create($validationAttributes["newAdherent"]);
+        ModelsAdherent::create([
+            "name" => $this->name,
+            "sexe" => $this->sexe,
+            "tel" => $this->tel,
+            "code" => $this->code,
+            "date_naiss" => $this->date_naiss,
+            "lieu_naiss" => $this->lieu_naiss,
+            "date_inscription" => $this->date_inscription,
+            "profession" => $this->profession,
+            "nationalite" => $this->nationalite,
+            "adresse_domicile" => $this->adresse_domicile,
+            "adresse_service" => $this->adresse_service,
+            "personne_a_prevenir" => $this->personne_a_prevenir,
+            "type_adhesion" => $this->type_adhesion,
+            "sit_matri" => $this->sit_matri,
+            "mutuelle_id" => ($this->mutuelle_id = auth()->user()->mutuelle->id)
+        ]);
 
-        $this->newAdherent = [];
+        $this->name = "";
+        $this->sexe = "";
+        $this->code = "";
+        $this->tel = "";
+        $this->date_naiss = "";
+        $this->lieu_naiss = "";
+        $this->date_inscription = "";
+        $this->profession = "";
+        $this->nationalite = "";
+        $this->adresse_domicile = "";
+        $this->adresse_service = "";
+        $this->personne_a_prevenir = "";
+        $this->type_adhesion = "";
+        $this->sit_matri = "";
+
 
         $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Adhérent ajouté avec succès !"]);
-    }
-
-    public function goToEdit($id)
-    {
-        $this->editAdherent = ModelsAdherent::find($id)->toArray();
-
-        $this->currentPage = PAGEEDIT;
-    }
-
-    public function updateAdherent()
-    {
-        $validationAttributes = $this->validate();
-
-        ModelsAdherent::find($this->editAdherent["id"])->update($validationAttributes["editAdherent"]);
-
-        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Adhérent modifié avec succès !"]);
-    }
-
-    public function confirmDelete($name, $id)
-    {
-        $this->dispatchBrowserEvent("showConfirmMessage", ["message" => [
-            "text" => "Voulez-vous vraiment supprimer $name de la liste des adhérents ?",
-            "title" => "Etes-vous sûr de continuer ?",
-            "type" => "warning",
-            "data"  => [
-                "adherent_id" => $id
-            ]
-        ]]);
-    }
-
-    public function delete($id)
-    {
-        if ($id) {
-            ModelsAdherent::destroy($id);
-
-            $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Adhérent supprimé avec succès !"]);
-        }
     }
 }

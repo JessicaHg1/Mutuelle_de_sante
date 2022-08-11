@@ -8,7 +8,12 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Bénéficiaire</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" wire:model='newSoin.benef'>
+                    <select class="form-select" aria-label="Default select example" wire:model='newSoin.beneficiaire_id'>
+                        <option selected>Choisir</option> 
+                            @foreach ($beneficiaires as $beneficiaire)
+                                <option value="{{ $beneficiaire->id }}">{{ $beneficiaire->name}}</option>
+                            @endforeach
+                    </select>
                   </div>
                 </div>
 

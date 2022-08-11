@@ -22,4 +22,9 @@ class Prestataire extends Model
     {
         return $this->hasMany(Soins::class);
     }
+
+    public function conventions()
+    {
+        return $this->hasMany(Partenariat::class);
+    }
 }

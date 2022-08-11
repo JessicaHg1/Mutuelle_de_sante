@@ -5,23 +5,26 @@ use Illuminate\Support\Str;
 define("PAGELISTE", "liste");
 define("PAGEAJOUTER", "ajouter");
 define("PAGEEDIT", "editer");
-define("PAGEBENEF", "beneficiaire");
-define("PAGEDETAIL", "detail");
 
 function getProfilsName()
 {
-    $profilsName = "";
+    $rolesName = "";
     $i = 0;
-    foreach (auth()->user()->profils as $profil) {
-        $profilsName .= $profil->nom;
+    foreach (auth()->user()->role as $role) {
+        $rolesName .= $role->nom;
 
-        if ($i == sizeof(auth()->user()->profils) - 1) {
-            $profilsName .= ",";
+        if ($i < sizeof(auth()->user()->role) - 1) {
+            $rolesName .= ",";
         }
 
         $i++;
     }
-    return $profilsName;
+    return $rolesName;
+}
+
+function getMutuelle()
+{
+    return auth()->user()->mutuelle->nom;
 }
 
 function setMenuClass($route, $classe)

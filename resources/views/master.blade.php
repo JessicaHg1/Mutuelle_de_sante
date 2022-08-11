@@ -83,7 +83,13 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-person"></i>
-                <span>Mon rôle</span>
+                <span>{{ getProfilsName() }}</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>{{ getMutuelle() }}</span>
               </a>
             </li>
             <li>
@@ -129,6 +135,14 @@
       
      
       @can("superadmin")
+
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="{{ route('pays') }}">
+          <i class="ri ri-community-line"></i>
+          <span>Pays</span>
+        </a>   
+      </li> 
+
       <li class="nav-item">
         <a href="{{ route('utilisateurs') }}" class="nav-link collapsed">
           <i class="bi bi-person"></i>
@@ -146,7 +160,14 @@
       <li class="nav-item">
         <a class="nav-link collapsed"  href="{{ route('prestataires') }}">
           <i class="ri ri-hospital-line"></i>
-          <span>Prestataires de soins</span>
+          <span>Formations sanitaires</span>
+        </a>   
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="{{ route('conventions') }}">
+          <i class="ri ri-hospital-line"></i>
+          <span>Conventions</span>
         </a>   
       </li>
       @endcan
@@ -161,16 +182,15 @@
       @endcan
 
       @can("secretaire")
-    
           <li class="nav-item">
-            <a href="{{ route('beneficiaires.adherents') }}" class="nav-link collapsed ">
-              <i class="ri ri-team-line"></i><span>Adhérents</span>
+            <a href="{{ route('adherents') }}" class="nav-link collapsed ">
+              <i class="ri ri-team-line"></i><span>Adherents</span>
             </a>
           </li>
 
-           <li class="nav-item">
-            <a href="{{ route('beneficiaires.beneficiaire') }}" class="nav-link collapsed ">
-              <i class="ri ri-team-line"></i><span>Personnes à charge</span>
+          <li class="nav-item">
+            <a href="{{ route('beneficiaires') }}" class="nav-link collapsed ">
+              <i class="ri ri-team-line"></i><span>Bénéficiaires</span>
             </a>
           </li>
         
@@ -214,13 +234,23 @@
       </li>  
       @endcan
 
-      <li class="nav-item">
-        <a class="nav-link collapsed"  href="">
-          <i class="bi bi-bar-chart-line"></i>
-          <span>Statistiques</span>
-        </a>   
-      </li>  
-      
+      @can("adherent")
+
+        <li class="nav-item">
+          <a class="nav-link collapsed"  href="">
+            <i class="bi bi-umbrella"></i>
+            <span>Liste des prestations</span>
+          </a>   
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed"  href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <i class="bi bi-umbrella"></i>
+            <span>Payer cotisation</span>
+          </a>   
+        </li> 
+
+      @endcan
       
     </ul>
 
@@ -248,14 +278,34 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="dialog">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Payer une cotisation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              
+                <livewire:cotisations.cotiser>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                 
+              </div>
+            </div>
+          </div>
+        </div>
+
   <!-- Vendor JS Files -->
- 
+  <script src="{{ asset('asset/vendor/bootstrap/js/jquery.js') }}"></script>
   <script src="{{ asset('asset/vendor/quill/quill.min.js') }}"></script>
   <script src="{{ asset('asset/vendor/simple-datatables/simple-datatables.js') }}"></script>
   <script src="{{ asset('asset/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('asset/vendor/php-email-form/validate.js') }}"></script>
   <!-- Template Main JS File -->
   <script src="{{ asset('asset/js/main.js') }}"></script>
+
+   <script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  

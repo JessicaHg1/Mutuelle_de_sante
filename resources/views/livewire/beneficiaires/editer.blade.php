@@ -58,6 +58,7 @@
                                     <input type="text" class="form-control" wire:model='editBenef.code'>
                               </div>
 
+                              
                               <div class="col-6">
                                   <label for="inputDate" class="form-label">Date de départ</label>
                                     <input type="date" class="form-control" wire:model='editBenef.date_depart'>

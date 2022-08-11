@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Validation\Rule as ValidationRule;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class Mutuelle extends Component
 {
@@ -32,7 +33,8 @@ class Mutuelle extends Component
             return [
                 'editMutuelle.nom' => ['required', ValidationRule::unique("mutuelles", "nom")->ignore($this->editMutuelle['id'])],
                 'editMutuelle.adresse' => 'required',
-                'editMutuelle.region' => 'required',
+                'editMutuelle.region' => 'string',
+                'editMutuelle.pays_id' => 'required',
                 'editMutuelle.email' =>  ['required', ValidationRule::unique("mutuelles", "email")->ignore($this->editMutuelle['id'])],
                 'editMutuelle.montant_cotisation' => 'required',
                 'editMutuelle.date_creation' => 'required',
@@ -46,7 +48,8 @@ class Mutuelle extends Component
 
         return [
             'newMutuelle.nom' => 'required | unique:mutuelles,nom',
-            'newMutuelle.region' => 'required',
+            'newMutuelle.region' => 'string',
+            'newMutuelle.pays_id' => 'required',
             'newMutuelle.adresse' => 'required | string',
             'newMutuelle.email' => 'required | unique:mutuelles,email, | max:200',
             'newMutuelle.montant_cotisation' => 'required | numeric',
@@ -62,7 +65,7 @@ class Mutuelle extends Component
 
     protected $messages = [
         'newMutuelle.nom.required' => "Le nom de la mutuelle est requis",
-        'newMutuelle.region.required' => "La région de la mutuelle est requise",
+        'newMutuelle.pays_id.required' => "Le pays de la mutuelle est requise",
         'newMutuelle.adresse.required' => "L'adresse de la mutuelle est requise",
         'newMutuelle.email.required' => "Le mail la mutuelle est requis",
         'newMutuelle.montant_cotisation.required' => "Le montant de la cotisation de la mutuelle est requis",
@@ -79,12 +82,16 @@ class Mutuelle extends Component
     {
         $searchCriteria = "%" . $this->search . "%";
 
+        $pdo = FacadesDB::connection()->getPdo();
+
+        $pays = FacadesDB::select('select id, nom from pays');
+
         $data = [
             "mutuelles" => ModelsMutuelle::where("nom", "like", $searchCriteria)
                 ->orWhere("region", "like", $searchCriteria)->paginate(3)
         ];
 
-        return view('livewire.mutuelles.mutuelle', $data)
+        return view('livewire.mutuelles.mutuelle', $data, compact('pays'))
             ->extends('master')
             ->section('content');
     }
@@ -122,9 +129,9 @@ class Mutuelle extends Component
 
         ModelsMutuelle::create($validationAttributes["newMutuelle"]);
 
-        $this->newMutuelle = [];
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Mutuelle ajoutée avec succès !"]);
 
-        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Mutuelle enregistrée avec succès !"]);
+        $this->newMutuelle = [];
     }
 
     public function confirmDelete($name, $id)

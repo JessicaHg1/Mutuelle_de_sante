@@ -3,23 +3,12 @@
               <h5 class="card-title">Enregistrer une cotisation</h5>
 
               <!-- General Form Elements -->
-              <form role="form" wire:submit.prevent='addCotisation'>
+              <form role="form" wire:submit.prevent='addCotisation()'>
+
                 <div class="row mb-3">
                       <label class="col-sm-2 col-form-label">Adhérent</label>
                       <div class="col-sm-10">
                         <select class="form-select" aria-label="Default select example" wire:model='newCotisation.adherent_id'>
-                          <option selected>Choisir</option> 
-                           @foreach ($adherents as $ad)
-                                <option value="{{ $ad->id }}">{{ $ad->name}}</option>
-                            @endforeach
-                        </select>
-                      </div>
-                </div>
-
-                <div class="row mb-3">
-                      <label class="col-sm-2 col-form-label">Personne à charge</label>
-                      <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example" wire:model='newCotisation.beneficiaire_id'>
                           <option selected>Choisir</option> 
                             @foreach ($beneficiaires as $benef)
                                     <option value="{{ $benef->id }}">{{ $benef->name}}</option>
@@ -27,6 +16,24 @@
                         </select>
                       </div>
                 </div>
+
+                @if ($mutualistes != null) 
+                  <div class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Bénéficiaires</legend>
+                    <div class="col-sm-10">
+              
+                          @foreach ($mutualistes as $mut)
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="*" wire:model='newCotisation.beneficiaire_id'>
+                              <label class="form-check-label" for="gridCheck1">
+                                {{ !empty($mut->name) ? $mut->name:''}}
+                              </label>
+                            </div>
+                          @endforeach
+                        
+                    </div>
+                  </div>  
+                @endif
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Date</label>

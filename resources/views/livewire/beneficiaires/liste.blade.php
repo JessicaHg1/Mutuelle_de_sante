@@ -3,7 +3,7 @@
                 <div class="card-header bg-secondary d-flex align-items-center">
                     <h3 class="card-title flex-grow-1 text-white">
                     <i class="bi bi-list-stars bi-2x"></i>
-                    Liste des personnes à charge
+                    Liste des bénéficiaires
                     </h3>
 
                     <div class="card-tools align-items-center">

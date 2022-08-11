@@ -17,7 +17,6 @@ class Soins extends Model
         'date',
         'prestation_id',
         'prestataire_id',
-        'adherent_id',
         'beneficiaire_id',
         'benef'
     ];
@@ -25,11 +24,6 @@ class Soins extends Model
     public function prestataire()
     {
         return $this->belongsTo(Prestataire::class, 'prestataire_id', 'id');
-    }
-
-    public function adherent()
-    {
-        return $this->belongsTo(Adherent::class, 'adherent_id', 'id');
     }
 
     public function prestation()

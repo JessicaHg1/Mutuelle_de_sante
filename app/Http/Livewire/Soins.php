@@ -24,8 +24,7 @@ class Soins extends Component
         'newSoin.montant' => 'required ',
         'newSoin.prestataire_id' => 'required ',
         'newSoin.prestation_id' => 'required ',
-        'newSoin.benef' => 'required ',
-
+        'newSoin.beneficiaire_id' => 'required ',
     ];
 
     public function render()
@@ -34,18 +33,15 @@ class Soins extends Component
 
         $prestations = FacadesDB::select('select id, nom from prestations');
 
-        $adherents = FacadesDB::select('select id, name from adherents');
-
         $beneficiaires = FacadesDB::select('select id, name from beneficiaires');
 
         $searchCriteria = "%" . $this->search . "%";
 
         $data = [
-            "soins" => ModelsSoins::where("benef", "like", $searchCriteria)
-                ->orWhere("date", "like", $searchCriteria)->paginate(5)
+            "soins" => ModelsSoins::where("date", "like", $searchCriteria)->paginate(5)
         ];
 
-        return view('livewire.soins.soins', $data, compact('prestations', 'prestataires', 'adherents', 'beneficiaires'))
+        return view('livewire.soins.soins', $data, compact('prestations', 'prestataires', 'beneficiaires'))
             ->extends('master')
             ->section('content');
     }

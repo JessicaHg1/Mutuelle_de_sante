@@ -21,11 +21,18 @@ class User extends Component
 
     public $search = "";
 
-    public $newUser = [];
+    public $name;
+    public $tel;
+    public $email;
+    public $password;
+    public $mutuelle_id;
+    public $sexe;
 
     public $editUser = [];
 
     public $rolePermissions = [];
+
+    public $mut;
 
     public function rules()
     {
@@ -39,12 +46,12 @@ class User extends Component
             ];
         }
         return [
-            'newUser.name' => ['required'],
-            'newUser.sexe' => ['required'],
-            'newUser.mutuelle_id' => ['required'],
-            'newUser.tel' => ['required', 'numeric', 'min:8', 'max:15', 'unique:users,tel'],
-            'newUser.email' => ['required', 'email',  'unique:users,email'],
-            'newUser.password' => ['string', 'min:8'],
+            'name' => 'required',
+            'sexe' => 'required',
+            'mutuelle_id' => 'required',
+            'tel' => 'required | numeric | min:70000000 | max:99999999 | unique:users,tel',
+            'email' => 'required | email | unique:users,email',
+            'password' => 'string | min:8',
         ];
     }
 
@@ -59,7 +66,18 @@ class User extends Component
                 ->orWhere("sexe", "like", $searchCriteria)->paginate(5)
         ];
 
-        return view('livewire.users.user', $data, compact('mutuelles'))
+        $user_mutuelle = array_filter($data, function ($user) {
+            return $user = auth()->user()->mutuelle->id;
+        });
+
+        $mut = auth()->user()->mutuelle->id;
+
+        $usersm = ModelsUser::where('mutuelle_id', $mut)->where(function ($query) {
+            $query->where("name", "like", "%" . $this->search . "%")
+                ->orWhere("sexe", "like", "%" . $this->search . "%");
+        })->paginate(5);
+
+        return view('livewire.users.user', $data, compact('mutuelles', 'mut', 'usersm'))
             ->extends('master')
             ->section('content');
     }
@@ -69,20 +87,25 @@ class User extends Component
         $this->currentPage = PAGEAJOUTER;
     }
 
-    public function addUser()
+    public function addUtilisateur()
     {
-        $validationAttributes = $this->validate();
+        $this->validate();
 
         ModelsUser::create([
-            "name" => $validationAttributes["newUser"]["name"],
-            "sexe" => $validationAttributes["newUser"]["sexe"],
-            "tel" => $validationAttributes["newUser"]["tel"],
-            "email" => $validationAttributes["newUser"]["email"],
-            "mutuelle_id" => $validationAttributes["newUser"]["mutuelle_id"],
-            "password" => Hash::make($validationAttributes["newUser"]["password"] = 'password')
+            "name" => $this->name,
+            "sexe" => $this->sexe,
+            "tel" => $this->tel,
+            "email" => $this->email,
+            "mutuelle_id" => $this->mutuelle_id,
+            "password" => Hash::make($this->password = 'password')
         ]);
 
-        $this->newUser = [];
+        $this->name = "";
+        $this->sexe = "";
+        $this->email = "";
+        $this->mutuelle_id = "";
+        $this->tel = "";
+        $this->password = "";
 
         $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Utilisateur ajouté avec succès !"]);
     }

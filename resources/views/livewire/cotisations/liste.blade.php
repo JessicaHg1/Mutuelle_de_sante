@@ -20,8 +20,7 @@
                 <thead>
                    <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Adhérent</th>
-                    <th scope="col">Personne à charge</th>
+                    <th scope="col">Bénéficiaire</th>
                     <th scope="col">Date</th>
                     <th scope="col">Montant</th>
                     <th scope="col">Etat</th>
@@ -32,13 +31,12 @@
                     @foreach ($cotisations as $cotisation)
                         <tr>
                             <td>{{ $cotisation->id }}</td>
-                            <td>{{ $cotisation->adherents->name}}</td>
-                            <td>{{ !empty($cotisation->beneficiaires) ? $cotisation->beneficiaires->name:'' }}</td>
+                            <td>{{ !empty($cotisation->adherent) ? $cotisation->adherent->name:'' }}</td>
                             <td>{{ $cotisation->date}}</td>
                             <td>{{ $cotisation->montant }}</td>
                             <td>{{ $cotisation->montant }}</td>
-                            <td class="text-center">
-                              <button type="button" class="btn btn-primary rounded-pill">Détail</button>
+                             <td class="text-center">
+                              <button class="btn btn-link" wire:click='reçu()'><i class="bi bi-printer"></i></button>
                             </td>
                         </tr>
                     @endforeach

@@ -18,8 +18,6 @@ class Dashboard extends Component
 
         $users = FacadesDB::table('users')->count();
 
-        $adherents = FacadesDB::table('adherents')->count();
-
         $benef = FacadesDB::table('beneficiaires')->count();
 
         $prestataires = FacadesDB::table('prestataires')->count();
@@ -44,13 +42,14 @@ class Dashboard extends Component
             $usersNb[] = count($values);
         }
 
+
+
         return view(
             'livewire.dashboard',
             ['userData' => $userData, 'mois' => $mois, 'usersNb' => $usersNb],
             compact(
                 'mutuelles',
                 'users',
-                'adherents',
                 'benef',
                 'prestataires',
                 'prestations',

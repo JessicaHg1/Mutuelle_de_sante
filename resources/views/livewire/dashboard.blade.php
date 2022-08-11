@@ -51,14 +51,14 @@
               <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Adhérents</h5>
+                  <h5 class="card-title">Bénéficiaires</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="ri ri-user-line"></i>
+                      <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>{{ $adherents }}</h6>
+                      <h6>{{ $benef }}</h6>
                       
                     </div>
                   </div>
@@ -67,30 +67,8 @@
               </div>
             </div><!-- End Revenue Card -->
 
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-md-4">
 
-              <div class="card info-card customers-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Personnes à charge</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $benef }}</h6>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-
-            <div class="col-xxl-4 col-md-4">
+            <div class="col-xxl-4 col-md-6">
 
               <div class="card info-card customers-card">
 
@@ -112,7 +90,7 @@
 
             </div>
 
-            <div class="col-xxl-4 col-md-4">
+            <div class="col-xxl-4 col-md-6">
 
               <div class="card info-card customers-card">
 
@@ -230,6 +208,80 @@
                   });
                 </script>
                 <!-- End Bar CHart -->
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Pie Chart</h5>
+
+                <!-- Pie Chart -->
+                <canvas id="pieChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 400px; width: 666px;" width="666" height="400"></canvas>
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    new Chart(document.querySelector('#pieChart'), {
+                      type: 'pie',
+                      data: {
+                        labels: [
+                          'Red',
+                          'Blue',
+                          'Yellow'
+                        ],
+                        datasets: [{
+                          label: 'My First Dataset',
+                          data: [300, 50, 100],
+                          backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                          ],
+                          hoverOffset: 4
+                        }]
+                      }
+                    });
+                  });
+                </script>
+                <!-- End Pie CHart -->
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Doughnut Chart</h5>
+
+                <!-- Doughnut Chart -->
+                <canvas id="doughnutChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 400px; width: 666px;" width="666" height="400"></canvas>
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    new Chart(document.querySelector('#doughnutChart'), {
+                      type: 'doughnut',
+                      data: {
+                        labels: [
+                          'Red',
+                          'Blue',
+                          'Yellow'
+                        ],
+                        datasets: [{
+                          label: 'My First Dataset',
+                          data: [300, 50, 100],
+                          backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                          ],
+                          hoverOffset: 4
+                        }]
+                      }
+                    });
+                  });
+                </script>
+                <!-- End Doughnut CHart -->
 
               </div>
             </div>

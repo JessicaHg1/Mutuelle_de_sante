@@ -21,7 +21,7 @@ class Beneficiaire extends Model
         'date_inscription',
         'date_depart',
         'photo',
-        'adherent_id'
+        'adherent_id',
     ];
 
     public function adherent()

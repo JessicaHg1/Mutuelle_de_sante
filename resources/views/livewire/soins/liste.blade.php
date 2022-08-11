@@ -40,7 +40,7 @@
                     @foreach ($soins as $soin)
                         <tr>
                             <td>{{ $soin->id }}</td>
-                            <td>{{ $soin->benef}}</td>
+                            <td>{{ $soin->beneficiaire->name}}</td>
                             <td>{{ $soin->prestataire->nom }}</td>
                             <td>{{ $soin->prestation->nom }}</td>
                             <td>{{ $soin->date }}</td>

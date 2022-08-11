@@ -9,11 +9,10 @@ class Adherent extends Model
 {
     use HasFactory;
 
-    protected $table = 'adherents';
+    protected $table = "adherents";
 
     protected $fillable = [
         'code',
-        'type_adhesion',
         'name',
         'sexe',
         'date_naiss',
@@ -21,24 +20,30 @@ class Adherent extends Model
         'nationalite',
         'date_inscription',
         'date_depart',
+        'photo',
+        'type_adhesion',
         'tel',
         'profession',
         'sit_matri',
         'adresse_service',
         'adresse_domicile',
         'personne_a_prevenir',
-        'photo',
         'mutuelle_id',
     ];
+
+    public function beneficiaires()
+    {
+        return $this->hasMany(Beneficiaire::class);
+    }
 
     public function mutuelle()
     {
         return $this->belongsTo(Mutuelle::class, 'mutuelle_id', 'id');
     }
 
-    public function beneficiaires()
+    public function soins()
     {
-        return $this->hasMany(Beneficiaire::class);
+        return $this->hasMany(Soins::class);
     }
 
     public function cotisations()
@@ -46,8 +51,8 @@ class Adherent extends Model
         return $this->hasMany(Cotisation::class);
     }
 
-    public function soins()
+    public function cotises()
     {
-        return $this->hasMany(Soins::class);
+        return $this->hasMany(Cotiser::class);
     }
 }
